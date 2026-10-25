@@ -8,10 +8,12 @@ import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.router.stack.pushNew
 import com.arkivanov.decompose.value.Value
 import com.pustovit.mysundaykmpapp.products.details.DefaultProductDetailsComponent
+import com.pustovit.mysundaykmpapp.products.di.ProductsFeatureComponent
 import com.pustovit.mysundaykmpapp.products.list.DefaultProductsListComponent
 
 class DefaultProductsRootComponent(
     componentContext: ComponentContext,
+    private val productsFeature: ProductsFeatureComponent,
 ) : ProductsRootComponent, ComponentContext by componentContext {
 
     private val navigation = StackNavigation<ProductsConfig>()
@@ -32,6 +34,7 @@ class DefaultProductsRootComponent(
             ProductsConfig.List -> ProductsRootComponent.Child.List(
                 component = DefaultProductsListComponent(
                     componentContext = componentContext,
+                    storeFactory = productsFeature.productsListStoreFactory,
                     onProductSelected = { productId ->
                         navigation.pushNew(ProductsConfig.Details(productId))
                     },
@@ -40,6 +43,7 @@ class DefaultProductsRootComponent(
             is ProductsConfig.Details -> ProductsRootComponent.Child.Details(
                 component = DefaultProductDetailsComponent(
                     componentContext = componentContext,
+                    storeFactory = productsFeature.productDetailsStoreFactory,
                     productId = config.productId,
                     onFinished = { navigation.pop() },
                 ),

@@ -8,12 +8,19 @@ import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.value.Value
 import com.pustovit.mysundaykmpapp.cart.DefaultCartComponent
 import com.pustovit.mysundaykmpapp.di.AppComponent
+import com.pustovit.mysundaykmpapp.products.di.createProductsFeatureComponent
 import com.pustovit.mysundaykmpapp.products.root.DefaultProductsRootComponent
 
 class DefaultRootComponent(
     componentContext: ComponentContext,
-    @Suppress("unused") private val appComponent: AppComponent,
+    appComponent: AppComponent,
 ) : RootComponent, ComponentContext by componentContext {
+
+    private val productsFeature = createProductsFeatureComponent(
+        productsRepository = appComponent.productsRepository,
+        cartRepository = appComponent.cartRepository,
+        storeFactory = appComponent.storeFactory,
+    )
 
     private val navigation = StackNavigation<TabConfig>()
 
@@ -42,6 +49,7 @@ class DefaultRootComponent(
             TabConfig.Products -> RootComponent.Child.Products(
                 component = DefaultProductsRootComponent(
                     componentContext = componentContext,
+                    productsFeature = productsFeature,
                 ),
             )
             TabConfig.Cart -> RootComponent.Child.Cart(

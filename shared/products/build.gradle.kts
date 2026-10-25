@@ -32,6 +32,7 @@ kotlin {
             implementation(libs.compose.ui)
             implementation(libs.decompose)
             implementation(libs.decompose.compose)
+            implementation(libs.essenty.lifecycle.coroutines)
             implementation(libs.mvikotlin)
             implementation(libs.mvikotlin.main)
             implementation(libs.mvikotlin.coroutines)

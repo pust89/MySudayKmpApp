@@ -4,26 +4,24 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
+import com.arkivanov.decompose.defaultComponentContext
 import com.pustovit.mysundaykmpapp.di.AppComponent
 import com.pustovit.mysundaykmpapp.di.create
+import com.pustovit.mysundaykmpapp.root.DefaultRootComponent
+import com.pustovit.mysundaykmpapp.root.RootContent
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
 
-        AppComponent::class.create()
+        val root = DefaultRootComponent(
+            componentContext = defaultComponentContext(),
+            appComponent = AppComponent::class.create(),
+        )
 
         setContent {
-            App()
+            RootContent(root)
         }
     }
-}
-
-@Preview
-@Composable
-fun AppAndroidPreview() {
-    App()
 }

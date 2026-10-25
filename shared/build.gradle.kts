@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.androidMultiplatformLibrary)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.ksp)
 }
 
@@ -56,6 +57,9 @@ kotlin {
             implementation(libs.compose.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
+            implementation(libs.decompose)
+            implementation(libs.decompose.compose)
+            implementation(libs.kotlinx.serialization.core)
             implementation(libs.mvikotlin)
             implementation(libs.mvikotlin.main)
             implementation(libs.kotlinInject.runtime)

@@ -1,3 +1,8 @@
 package com.pustovit.mysundaykmpapp.cart
 
-interface CartComponent
+import kotlinx.coroutines.flow.StateFlow
+
+interface CartComponent {
+    val state: StateFlow<CartStore.State>
+    fun onIntent(intent: CartStore.Intent)
+}

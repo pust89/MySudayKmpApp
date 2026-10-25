@@ -29,3 +29,6 @@ dependencyResolutionManagement {
 
 include(":androidApp")
 include(":shared")
+include(":shared:data")
+include(":shared:products")
+include(":shared:cart")
